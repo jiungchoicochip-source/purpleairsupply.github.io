@@ -1,0 +1,516 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&display=swap");
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  /* 
+         Change favorite color:
+
+         Default (Purple): hsl(255, 60%, 64%)
+         Blue: hsl(220, 60%, 64%) - Pink: hsl(300, 60%, 64%)
+         Green: hsl(110, 60%, 64%) - Cyan: hsl(180, 60%, 64%)
+         Orange: hsl(15, 60%, 64%) - Red: hsl(358, 60%, 64%)
+
+         For more colors visit: https://htmlcolorcodes.com/
+         -> Choose any color 
+         -> Copy the color mode (HSL)
+  */
+  --hue: 255;
+  --first-color: hsl(var(--hue), 60%, 64%);
+  --first-color-alt: hsl(var(--hue), 80%, 56%);
+  --first-color-alt-2: hsl(var(--hue), 60%, 56%);
+  --first-color-light: hsl(var(--hue), 60%, 74%);
+  --title-color: hsl(240, 8%, 95%);
+  --text-color: hsl(240, 8%, 70%);
+  --text-color-light: hsl(240, 8%, 50%);
+  --body-color: hsl(240, 100%, 2%);
+  --container-color: hsl(240, 8%, 6%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Instrument Serif", serif;
+  --second-font: "Instrument Serif", serif;
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.75rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 3rem;
+    --bigger-font-size: 2rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+h1, h2, h3, h4 {
+  color: var(--title-color);
+  font-family: var(--second-font);
+  font-weight: var(--font-semi-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 1rem;
+}
+
+.section__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+  margin-bottom: 3rem;
+}
+
+.section__title span {
+  color: var(--first-color);
+}
+
+.section.active-section {
+  opacity: 1;
+  visibility: visible;
+  filter: blur(0px);
+}
+
+.main {
+  overflow: hidden;
+}
+
+/*=============== BLOB ===============*/
+/* Blob animate */
+.blob-animate {
+  width: 70px;
+  height: 80px;
+  background: linear-gradient(180deg,
+              var(--first-color-alt) 20%,
+              var(--first-color-light) 100%);
+  border-radius: 100%;
+  position: absolute;
+  filter: blur(30px);
+  z-index: -1;
+  animation: animateBlob 5s linear infinite;
+}
+
+.header .blob-animate {
+  top: -20px;
+  left: -20px;
+  animation: moveBlobHeader 10s ease-in-out infinite alternate;
+}
+
+@keyframes animateBlob{
+  0%{
+    transform: rotate(0);  
+ }
+ 100%{
+    transform: rotate(360deg);
+ }
+}
+
+/* Blob */
+@keyframes moveBlobHeader {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(110px); /* Adjust pixel distance to match exact KCGJ text width */
+  }
+}
+
+/*=============== CUSTOM CURSOR ===============*/
+
+
+/* Hide the custom cursor */
+
+
+/*=============== HEADER & NAV ===============*/
+.header{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg,
+             var(--body-color) 60%,
+             hsla(240,100%, 2%, 0) 100%);
+  z-index: var(--z-fixed);
+}
+
+
+
+
+
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  padding-block: 1rem;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-family: "Cinzel", serif;   /* Classic luxury aesthetic */
+  font-weight: 600;                /* Elegant weight without feeling bulky */
+  font-size: 2.2rem;
+  letter-spacing: 4px;             /* Generous spacing creates a refined, high-end feel */
+  text-transform: uppercase;
+  transition: color .4s;
+}
+
+.nav__logo:hover{
+  color: var(--first-color);
+}
+
+.nav__list{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: .5rem;
+}
+
+.nav__link{
+  color: var(--title-color);
+  font-family: var(--second-font);
+  font-weight: var(--font-semi-bold);
+  font-size: 2rem; /* Adjust this value to your preferred size */
+  transition: color .4s, text-shadow .4s;
+}
+
+.nav__link:hover{
+  color: var(--first-color);
+  text-shadow: 0 2px 6px var(--first-color);
+}
+
+/* Active link */
+
+
+/*=============== HOME ===============*/
+.home__data {
+  position: absolute;
+  left: 10rem;      /* Distance from the left edge (pushed past your social icons) */
+  bottom: 22rem;    /* Distance from the bottom edge (lower left) */
+  z-index: 10;     /* Ensures it stays visible above backgrounds/shadows */
+  text-align: left; /* Aligns the text to the left */
+}
+
+.home{
+  position: relative;
+}
+
+.home__container{
+  position: relative;
+  padding-top: 5rem; /* Space for fixed header */
+  row-gap: 1rem;     /* Keep gaps tight so it fits in 100vh */
+  justify-items: center;
+  text-align: center;
+}
+
+.home__greeting {
+  font-size: 1.75rem; 
+  color: var(--first-color);
+  font-weight: 500;
+  font-family: "Fira Code", monospace;  /* Tech code font */
+  letter-spacing: -0.5px;
+}
+
+.home__name {
+  font-family: "Italiana", serif;
+  font-size: 4rem;                 /* Significantly larger size */
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  
+  /* Creative Gradient Fill */
+  background: linear-gradient(135deg, var(--title-color) 30%, var(--first-color-light) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Soft Glow Effect */
+  filter: drop-shadow(0 0 12px rgba(180, 140, 255, 0.25));
+}
+
+.home__image {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  
+  /* Shift the image and blob upward (adjust the -8rem value as needed) */
+  transform: translateY(-3rem); 
+}
+.home__image .blob-animate {
+  width: 240px; /* Make sure it's slightly larger than the profile width */
+  height: 190px;
+  filter: blur(40px);
+}
+
+.home__perfil {
+  width: 380px; /* Increased from 320px. Try 400px or 420px if you want it even bigger! */
+  border-radius: 4rem;
+  
+  /* Blurs and fades out the bottom portion of the image */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+
+.home__shadow, .home__info, .home__social, .home__cv{
+  position: absolute;
+}
+
+.home__shadow{
+  width: 100%;
+  height: 375px;
+  bottom: 1rem;
+  z-index: 5;
+  background: linear-gradient(180deg,
+              hsla(240, 100%, 2%, 0) 60%,
+              hsl(240, 100%, 2%) 85%);
+}
+
+.home__info {
+  position: absolute;
+  bottom: 3.5rem;       /* Decreased from 9rem to move the text lower */
+  left: 50%;
+  transform: translateX(-50%);   /* Keeps it horizontally centered */
+  z-index: 15;                     
+  text-align: center;
+  width: 100%;
+}
+/* Make sure .home__shadow and other elements don't block it */
+.home__shadow, .home__social, .home__cv{
+  position: absolute;
+
+}
+
+.home__split {
+  font-size: 2rem;
+  font-weight: var(--font-regular);
+  color: var(--first-color);
+  
+  /* Shifts only "Creative" to the left */
+  transform: translateX(-7rem) translateY(10px); /* Adjust pixel/rem value as needed */
+}
+
+.home__profession-1, .home__profession-2{
+  font-size: var(--biggest-font-size);
+  text-align: center;
+  overflow: hidden;
+}
+
+.home__profession-1{
+  position: relative;
+  color: var(--first-color);
+}
+
+.home__profession-1::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: linear-gradient(0deg,
+                    hsl(0, 0%, 0%) 10%,
+                    hsla(0, 0%, 0%, 0) 60%);
+  bottom: 0;
+  left: 0%;
+}
+
+.home__profession-2{
+  transform: translateY(-1rem);
+}
+
+.home__social{
+  position: absolute; 
+  z-index: 20; 
+  left: 0;
+  top: 75%; /* Increased from 60% to move the logos lower down */
+  transform: translateY(-50%); 
+  display: flex;
+  flex-direction: column;
+  row-gap: .75rem;
+}
+
+.home__social-link{
+  color: var(--title-color);
+  font-size: 1.75rem; /* <-- Increase this value to make the logos larger (e.g., 2rem) */
+  transition: transform .4s, color .4s;
+}
+
+.home__social-link:hover{
+  color: var(--first-color);
+  transform: translateY(-.25rem);
+}
+
+.home__cv {
+  bottom: 5rem;
+  right: 1.5rem; 
+  z-index: 20;                     /* Increased z-index to make sure it's clickable above shadows */
+  color: var(--text-color-light);
+  font-weight: var(--font-medium);
+  font-size: 2rem; 
+  font-family: "Instrument Serif", serif;   /* Matches the "Hello, world!" and KCGJ logo font */
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  transition: color .4s;
+}
+
+.home__cv i{
+  font-size: 2rem; /* Matches the larger 18px text size */
+}
+
+.home__cv:hover{
+  color: var(--first-color);
+}
+
+/*=============== ABOUT ===============*/
+
+
+/*=============== PROJECTS ===============*/
+
+
+/* Swiper class */
+
+
+/*=============== WORK ===============*/
+
+
+/* Show & hide sections */
+
+
+/* Active tab */
+
+
+/*=============== SERVICES ===============*/
+
+
+/* Hide services info */
+
+
+/* Rotate icon */
+
+
+/*=============== TESTIMONIALS ===============*/
+
+
+/* Infinite scroll animation */
+
+
+/*=============== CONTACT ===============*/
+
+
+/*=============== FOOTER ===============*/
+
+
+/*=============== SCROLL BAR ===============*/
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+  .container {
+    margin-inline: 1rem;
+  }
+}
+
+/* For medium devices */
+
+
+/* For large devices */
+@media screen and (min-width: 1366px) {
+  .container {
+  max-width: 1400px;
+  margin-left: 2.5rem;   /* Set your desired smaller left margin */
+  margin-right: 2.5rem;  /* Keeps the right margin as it was */
+  }
+
+  .nav{
+    height: calc(var(--header-height) + 2rem);
+    align-items: center;
+  }
+  .nav__logo{
+    align-self: initial;
+  }
+  .nav__list{
+    flex-direction: row;
+    column-gap: 5.5rem;
+  }
+}
+
+
+/* For 2K resolutions (2048 x 1152, 2048 x 1536) */
+
+
+/* Custom cursor is hidden for mobile devices */
+
